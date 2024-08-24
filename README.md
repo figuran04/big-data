@@ -1,2 +1,5 @@
-<!--START_SECTION:medium-->
-<!--END_SECTION:medium-->
+## Struktur Folder
+
+<!--START:structure-->
+
+<!--END:structure-->
