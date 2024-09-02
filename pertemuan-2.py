@@ -19,7 +19,7 @@ def update_readme(summary):
     summary = unescape(summary)
 
     # Read the existing README content
-    with open('pertemuan-1/README.md', 'r', encoding='utf-8') as f:
+    with open('pertemuan-2/README.md', 'r', encoding='utf-8') as f:
         readme_content = f.readlines()
 
     # Find the section to update
@@ -42,10 +42,10 @@ def update_readme(summary):
         updated_content = readme_content[:start_idx + 1] + [new_content] + readme_content[end_idx:]
 
     # Write the updated content back to README.md
-    with open('pertemuan-1/README.md', 'w', encoding='utf-8') as f:
+    with open('pertemuan-2/README.md', 'w', encoding='utf-8') as f:
         f.writelines(updated_content)
 
 if __name__ == "__main__":
-    post_link = "https://medium.com/@dikaelsaputra/panduan-lengkap-pyspark-dan-pandas-instalasi-praktik-dasar-dan-lanjutan-86ab9ce4ea55?source=rss-272e0aace4a6------2"
+    post_link = "https://medium.com/@dikaelsaputra/instalasi-dan-konfigurasi-hadoop-serta-spark-di-windows-f7f3582def93?source=rss-272e0aace4a6------2"
     summary = fetch_medium_post_summary(FEED_URL, post_link)
     update_readme(summary)
