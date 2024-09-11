@@ -16,5 +16,11 @@
 - [pertemuan-2](/pertemuan-2)
   - [README.md](/pertemuan-2/README.md)
   - [pertemuan-2.ipynb](/pertemuan-2/pertemuan-2.ipynb)
+- [pertemuan-3.py](/pertemuan-3.py)
+- [pertemuan-3](/pertemuan-3)
+  - [MentalHealthSurvey.csv](/pertemuan-3/MentalHealthSurvey.csv)
+  - [README.md](/pertemuan-3/README.md)
+  - [input.txt](/pertemuan-3/input.txt)
+  - [pertemuan-3.ipynb](/pertemuan-3/pertemuan-3.ipynb)
 
 <!--END:structure-->
