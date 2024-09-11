@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '21 21 * * *'
   workflow_dispatch: 
+  push:
+    branches:
+      - main
 
 jobs:
   update:
@@ -27,6 +30,9 @@ jobs:
 
     - name: Run script
       run: python pertemuan-2.py
+
+    - name: Run script
+      run: python pertemuan-3.py
 
     - name: Commit and push changes
       uses: EndBug/add-and-commit@v9
