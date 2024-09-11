@@ -3,7 +3,10 @@ name: main
 on:
   schedule:
     - cron: '21 21 * * *'
-  workflow_dispatch: 
+  workflow_dispatch:
+  push:
+    branches:
+      - main 
 
 jobs:
   update:
