@@ -50,6 +50,7 @@ if __name__ == "__main__":
         ("https://medium.com/@dikaelsaputra/panduan-lengkap-pyspark-dan-pandas-instalasi-praktik-dasar-dan-lanjutan-86ab9ce4ea55?source=rss-272e0aace4a6------2", 'pertemuan-1/README.md'),
         ("https://medium.com/@dikaelsaputra/instalasi-dan-konfigurasi-hadoop-serta-spark-di-windows-f7f3582def93?source=rss-272e0aace4a6------2", 'pertemuan-2/README.md'),
         ("https://medium.com/@dikaelsaputra/implementasi-mapreduce-hadoop-sederhana-b413cfc67f5c?source=rss-272e0aace4a6------2", 'pertemuan-3/README.md')
+        ("https://medium.com/@dikaelsaputra/ekosistem-hadoop-pig-dan-hive-43b48d369828?source=rss-272e0aace4a6------2", 'pertemuan-4/README.md')
     ]
     
     for post_link, readme_path in posts:
