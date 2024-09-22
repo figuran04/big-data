@@ -20,5 +20,4 @@
   - [input.txt](/pertemuan-3/input.txt)
   - [pertemuan-3.ipynb](/pertemuan-3/pertemuan-3.ipynb)
 - [pertemuan.py](/pertemuan.py)
-
 <!--END:structure-->
