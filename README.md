@@ -21,6 +21,8 @@
   - [pertemuan-3.ipynb](/pertemuan-3/pertemuan-3.ipynb)
 - [pertemuan-4](/pertemuan-4)
   - [README.md](/pertemuan-4/README.md)
+- [pertemuan-5](/pertemuan-5)
+  - [README.md](/pertemuan-5/README.md)
 - [pertemuan.py](/pertemuan.py)
 
 <!--END:structure-->
