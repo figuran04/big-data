@@ -1,55 +1,85 @@
-import requests
+import feedparser
+from bs4 import BeautifulSoup
+from html import escape
 
-# Konfigurasi
-GITHUB_API_URL = 'https://api.github.com/repos/{owner}/{repo}/contents'
-README_PATH = 'README.md'
-START_TAG = '<!--START:structure-->'
-END_TAG = '<!--END:structure-->'
+FEED_URL = "https://medium.com/feed/@dikaelsaputra"
 
-def fetch_repo_contents(owner, repo, path=''):
-    url = GITHUB_API_URL.format(owner=owner, repo=repo) + path
-    response = requests.get(url)
-    response.raise_for_status()
-    return response.json()
+def fetch_medium_posts(feed_url, num_posts=10, category_filter='oop'):
+    feed = feedparser.parse(feed_url)
+    posts = []
 
-def generate_markdown_tree(contents, base_url='', level=0):
-    markdown = ''
-    for item in contents:
-        item_url = f'{base_url}/{item["name"]}' if base_url else f'/{item["name"]}'
-        indent = '  ' * level
-        if item['type'] == 'dir':
-            markdown += f'{indent}- [{item["name"]}]({item_url})\n'
-            sub_contents = fetch_repo_contents(owner, repo, '/' + item['path'])
-            markdown += generate_markdown_tree(sub_contents, item_url, level + 1)
-        else:
-            markdown += f'{indent}- [{item["name"]}]({item_url})\n'
-    return markdown
+    for entry in feed.entries:
+        # Memeriksa apakah artikel memiliki tag yang sesuai dengan kategori yang diinginkan
+        categories = [tag.term for tag in entry.tags] if 'tags' in entry else []
+        if category_filter not in categories:
+            continue  # Jika kategori tidak sesuai, skip entri ini
+        
+        title = entry.title
+        link = entry.link
 
-def update_readme_with_structure(readme_path, structure):
-    with open(readme_path, 'r') as file:
-        content = file.read()
+        # Mengambil summary dengan BeautifulSoup
+        summary_html = entry.summary
+        soup = BeautifulSoup(summary_html, 'html.parser')
+
+        # Menyaring img tag dan mengambil src
+        img_tag = soup.find('img')
+        image_url = img_tag['src'] if img_tag else None
+
+        # Mengambil summary dengan maksimal 140 karakter
+        summary = soup.get_text()[:100] + '...' if len(soup.get_text()) > 100 else soup.get_text()
+
+        posts.append((title, link, image_url, summary))
+
+        # Membatasi jumlah artikel sesuai dengan num_posts
+        if len(posts) >= num_posts:
+            break
+
+    return posts
+
+def update_readme(posts):
+    # Read the existing README content
+    with open('README.md', 'r') as f:
+        readme_content = f.readlines()
+
+    # Find the section to update
+    start_marker = "<!--START_SECTION:medium-->"
+    end_marker = "<!--END_SECTION:medium-->"
+    start_idx = None
+    end_idx = None
+
+    for idx, line in enumerate(readme_content):
+        if start_marker in line:
+            start_idx = idx
+        if end_marker in line:
+            end_idx = idx
+
+    # Prepare new content
+    new_content = '\n'
+    new_content += '<div style="overflow-x:auto;">\n'
+    new_content += '<table style="width: 100%; border-collapse: collapse; color: white;">\n'
+    new_content += '  <tr>\n'
+    new_content += f'    <th style="border: 1px solid white; padding: 10px;">Summary</th>\n'
+    new_content += f'    <th style="border: 1px solid white; padding: 10px;">Thumbnail</th>\n'
+    new_content += '  </tr>\n'
+
+    for title, link, image_url, summary in posts:
+        new_content += '  <tr>\n'
+        new_content += f'    <td style="border: 1px solid white; padding: 10px;"><h3><a href="{link}" target="_blank" style="color: white; text-decoration: none;">{escape(title)}</a></h3><p>{escape(summary)}</p></td>\n'
+        new_content += f'    <td style="border: 1px solid white; padding: 10px;"><img src="{image_url}" alt="Post Image" style="width: 100px; height: auto;" /></td>\n'
+        new_content += '  </tr>\n'
+
+    new_content += '</table>\n'    
+    new_content += '</div>\n'
+    new_content += '\n'
     
-    start_idx = content.find(START_TAG) + len(START_TAG)
-    end_idx = content.find(END_TAG)
-    
-    if start_idx == -1 or end_idx == -1:
-        raise ValueError("Tags not found in README.md")
+    # If markers are found, replace the content in between
+    if start_idx is not None and end_idx is not None:
+        updated_content = readme_content[:start_idx + 1] + [new_content] + readme_content[end_idx:]
 
-    new_content = content[:start_idx] + '\n' + structure + '\n' + content[end_idx:]
-    
-    with open(readme_path, 'w') as file:
-        file.write(new_content)
+    # Write the updated content back to README.md
+    with open('README.md', 'w') as f:
+        f.writelines(updated_content)
 
-def main():
-    global owner, repo
-    owner = 'figuran04'
-    repo = 'big-data'
-
-    contents = fetch_repo_contents(owner, repo)
-    markdown_structure = generate_markdown_tree(contents)
-    
-    update_readme_with_structure(README_PATH, markdown_structure)
-    print("README.md telah diperbarui dengan struktur folder.")
-
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    posts = fetch_medium_posts(FEED_URL, category_filter='big-data')
+    update_readme(posts)
