@@ -1,4 +1,4 @@
-## Struktur Folder
+## Baca di Medium
 
 <!--START_SECTION:medium-->
 
