@@ -51,7 +51,8 @@ if __name__ == "__main__":
         ("https://medium.com/@dikaelsaputra/instalasi-dan-konfigurasi-hadoop-serta-spark-di-windows-f7f3582def93?source=rss-272e0aace4a6------2", 'pertemuan-2/README.md'),
         ("https://medium.com/@dikaelsaputra/implementasi-mapreduce-hadoop-sederhana-b413cfc67f5c?source=rss-272e0aace4a6------2", 'pertemuan-3/README.md'),
         ("https://medium.com/@dikaelsaputra/ekosistem-hadoop-pig-dan-hive-43b48d369828?source=rss-272e0aace4a6------2", 'pertemuan-4/README.md'),
-        ("https://medium.com/@dikaelsaputra/tutorial-lengkap-mongodb-atlas-dengan-mongodb-compass-d3b015cf4712?source=rss-272e0aace4a6------2", 'pertemuan-5/README.md')
+        ("https://medium.com/@dikaelsaputra/tutorial-lengkap-mongodb-atlas-dengan-mongodb-compass-d3b015cf4712?source=rss-272e0aace4a6------2", 'pertemuan-5/README.md'),
+        ("https://medium.com/@dikaelsaputra/data-processing-dengan-apache-spark-14af61b5c22b?source=rss-272e0aace4a6------2", 'pertemuan-6/README.md')
     ]
     
     for post_link, readme_path in posts:
