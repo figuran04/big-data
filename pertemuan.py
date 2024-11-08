@@ -54,7 +54,8 @@ if __name__ == "__main__":
         ("https://medium.com/@dikaelsaputra/tutorial-lengkap-mongodb-atlas-dengan-mongodb-compass-d3b015cf4712?source=rss-272e0aace4a6------2", 'pertemuan-5/README.md'),
         ("https://medium.com/@dikaelsaputra/data-processing-dengan-apache-spark-14af61b5c22b?source=rss-272e0aace4a6------2", 'pertemuan-6/README.md'),
         ("https://medium.com/@dikaelsaputra/operasi-dasar-sql-di-spark-sql-b09121677bac?source=rss-272e0aace4a6------2", 'pertemuan-9/README.md'),
-        ("https://medium.com/@dikaelsaputra/implementasi-nosql-database-mongodb-dengan-pymongo-689ae79ac6c6?source=rss-272e0aace4a6------2", 'pertemuan-10/README.md')
+        ("https://medium.com/@dikaelsaputra/implementasi-nosql-database-mongodb-dengan-pymongo-689ae79ac6c6?source=rss-272e0aace4a6------2", 'pertemuan-10/README.md'),
+        ("https://medium.com/@dikaelsaputra/advanced-mongodb-operations-and-data-query-6403253b25a4?source=rss-272e0aace4a6------2", 'pertemuan-11/README.md')
     ]
     
     for post_link, readme_path in posts:
