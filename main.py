@@ -56,7 +56,7 @@ def update_readme(posts):
     # Prepare new content
     new_content = '\n'
     new_content += '<div style="overflow-x:auto;">\n'
-    new_content += '<table style="width: 100%; border-collapse: collapse; color: white;">\n'
+    new_content += '<table style="width: 100%; border-collapse: collapse;">\n'
     new_content += '  <tr>\n'
     new_content += f'    <th style="border: 1px solid white; padding: 10px;">Summary</th>\n'
     new_content += f'    <th style="border: 1px solid white; padding: 10px;">Thumbnail</th>\n'
@@ -64,7 +64,7 @@ def update_readme(posts):
 
     for title, link, image_url, summary in posts:
         new_content += '  <tr>\n'
-        new_content += f'    <td style="border: 1px solid white; padding: 10px;"><h3><a href="{link}" target="_blank" style="color: white; text-decoration: none;">{escape(title)}</a></h3><p>{escape(summary)}</p></td>\n'
+        new_content += f'    <td style="border: 1px solid white; padding: 10px;"><h3><a href="{link}" target="_blank" style="text-decoration: none;">{escape(title)}</a></h3><p>{escape(summary)}</p></td>\n'
         new_content += f'    <td style="border: 1px solid white; padding: 10px;"><img src="{image_url}" alt="Post Image" style="width: 100px; height: auto;" /></td>\n'
         new_content += '  </tr>\n'
 
