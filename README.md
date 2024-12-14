@@ -30,7 +30,5 @@
 <!--END_SECTION:medium-->
 
 <div align="center">
-  
-### [--- More ---](https://medium.com/@dikaelsaputra)
-
+  <h3><a href="https://medium.com/@dikaelsaputra" target="_blank" style="text-decoration: none;">--- More ---</a></h3>
 </div>
