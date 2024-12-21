@@ -2,8 +2,8 @@ name: pertemuan
 
 on:
   schedule:
-    - cron: '21 21 * * *'
-  workflow_dispatch: 
+    - cron: "21 21 * * *"
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -13,24 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.8'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
 
-    - name: Install dependencies
-      run: |
-        pip install feedparser
+      - name: Install dependencies
+        run: |
+          pip install feedparser requests beautifulsoup4 pillow
 
-    - name: Run script
-      run: python pertemuan.py
+      - name: Run script
+        run: python pertemuan.py
 
-    - name: Commit and push changes
-      uses: EndBug/add-and-commit@v9
-      with:
-        author_name: 'GitHub Actions'
-        author_email: 'actions@github.com'
-        message: 'Update Medium post'
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "GitHub Actions"
+          author_email: "actions@github.com"
+          message: "Update Medium post"
