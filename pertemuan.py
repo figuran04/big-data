@@ -111,6 +111,6 @@ if __name__ == "__main__":
         summary = fetch_medium_post_summary(FEED_URL, post_link)
         update_readme(summary, readme_path, post_link)
 
-    for index, post_url in enumerate(posts[0]):
+    for index, (post_url, _) in enumerate(posts):
         post_data = fetch_post_data(post_url)
         create_post_image(post_data, index)
