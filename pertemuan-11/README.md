@@ -1,5 +1,4 @@
 <!--START_SECTION:medium-->
-[Baca di Medium](https://medium.com/@dikaelsaputra/advanced-mongodb-operations-and-data-query-6403253b25a4?source=rss-272e0aace4a6------2)
 
 [Baca di Medium](https://medium.com/@dikaelsaputra/advanced-mongodb-operations-and-data-query-6403253b25a4?source=rss-272e0aace4a6------2)
 

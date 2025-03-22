@@ -16,42 +16,23 @@ def fetch_medium_post_summary(feed_url, post_link):
     
     for entry in feed.entries:
         if entry.link == post_link:
-            return unescape(entry.summary)
-    
-    return None  # Jika tidak ditemukan, kembalikan None
+            return entry.summary  # Mengembalikan summary jika ditemukan
 
-def read_existing_summary(readme_path):
-    if not os.path.exists(readme_path):
-        return None
-
-    with open(readme_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    start_marker = "<!--START_SECTION:medium-->"
-    end_marker = "<!--END_SECTION:medium-->"
-    start_idx = content.find(start_marker)
-    end_idx = content.find(end_marker)
-
-    if start_idx != -1 and end_idx != -1:
-        old_summary = content[start_idx + len(start_marker):end_idx].strip()
-        return old_summary
-
-    return None
+    return None  # Mengembalikan None jika summary tidak ditemukan
 
 def update_readme(summary, readme_path, post_link):
-    old_summary = read_existing_summary(readme_path)
-
     if summary is None:
-        summary = old_summary  # Gunakan ringkasan lama jika tidak ditemukan yang baru
+        print(f"Skipping update for {readme_path} as summary is not found.")
+        return  # Tidak mengubah README jika summary tidak ditemukan
 
-    if summary is None:
-        return  # Jika tidak ada ringkasan sebelumnya dan baru, tidak perlu update
+    # Unescape HTML entities in the summary
+    summary = unescape(summary)
 
-    # Baca isi README
+    # Baca isi README yang ada
     with open(readme_path, 'r', encoding='utf-8') as f:
         readme_content = f.readlines()
 
-    # Menentukan posisi untuk mengganti teks di dalam tag pembatas
+    # Menandai bagian yang perlu diperbarui
     start_marker = "<!--START_SECTION:medium-->"
     end_marker = "<!--END_SECTION:medium-->"
     start_idx = None
@@ -63,14 +44,14 @@ def update_readme(summary, readme_path, post_link):
         if end_marker in line:
             end_idx = idx
 
-    # Buat konten baru
-    new_content = f"{start_marker}\n[Baca di Medium]({post_link})\n\n{summary}\n{end_marker}\n"
+    # Menyiapkan konten baru
+    new_content = f'[Baca di Medium]({post_link})\n\n{summary}\n'
 
-    # Jika marker ditemukan, lakukan update
+    # Hanya memperbarui jika marker ditemukan
     if start_idx is not None and end_idx is not None:
-        updated_content = readme_content[:start_idx] + [new_content] + readme_content[end_idx + 1:]
+        updated_content = readme_content[:start_idx + 1] + [new_content] + readme_content[end_idx:]
 
-        # Tulis ulang README.md
+        # Simpan kembali isi README yang telah diperbarui
         with open(readme_path, 'w', encoding='utf-8') as f:
             f.writelines(updated_content)
 
@@ -95,7 +76,7 @@ def create_post_image(post_data, index):
     draw = ImageDraw.Draw(image)
     font_size = 62
     font = ImageFont.truetype('Helvetica-Bold.ttf', font_size)
-
+    
     if post_data[0]:
         try:
             response = requests.get(post_data[0])
@@ -104,14 +85,16 @@ def create_post_image(post_data, index):
             image.paste(img, (0, 0))
         except Exception as e:
             print(f"Error loading image: {e}")
-
+     
     text_claps = [f"{post_data[2]}", f"{post_data[1]}"]
-    text_x, text_y, line_height = 0, 415, 10  
-
+    line_height = 10  
+    text_x = 0       
+    text_y = 415      
+    
     for line in text_claps:
         draw.text((text_x, text_y), line, font=font, fill='black')
         text_y += font_size + line_height  
-
+    
     output_path = os.path.join(output_folder, f'post_{index + 1}.png')
     image.save(output_path, "PNG")
 
