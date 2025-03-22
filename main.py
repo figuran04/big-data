@@ -74,10 +74,10 @@ def update_readme(posts):
 
     for post in new_posts:
         title, link, image_url, summary = post
-        row = f'<p><a href="{link}" target="_blank" style="text-decoration: none;"><strong>{escape(title)}</strong></a></p>'
-        row += f'<p>{escape(summary)}</p>'
-        if image_url:
-            row += f'<img src="{image_url}" alt="Post Image" style="width: 100px; height: auto;" />\n'
+        row = '  <tr>\n'
+        row += f'    <td style="border: 1px solid white; padding: 10px;"><h3><a href="{link}" target="_blank" style="text-decoration: none;">{escape(title)}</a></h3><p>{escape(summary)}</p></td>\n'
+        row += f'    <td style="border: 1px solid white; padding: 10px;"><img src="{image_url}" alt="Post Image" style="width: 100px; height: auto;" /></td>\n'
+        row += '  </tr>\n'
         new_section.append(row)
 
     updated_content += ''.join(new_section + old_section)
